@@ -9,7 +9,6 @@ import './store/them.dart';
 void main() => runApp(
       MultiProvider(
         providers: [
-          // ChangeNotifierProvider(create: (context) => UserModel()),
           ChangeNotifierProvider<UserModel>(create: (_) => UserModel()),
           ChangeNotifierProvider<PlayerModel>(create: (_) => PlayerModel()),
           ChangeNotifierProvider<AppSettingsModel>(
