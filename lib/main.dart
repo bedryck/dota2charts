@@ -4,6 +4,7 @@ import './store/store.dart';
 import 'package:provider/provider.dart';
 import './store/player.dart';
 import './store/appSettings.dart';
+import './store/them.dart';
 
 void main() => runApp(
       MultiProvider(
@@ -11,22 +12,21 @@ void main() => runApp(
           // ChangeNotifierProvider(create: (context) => UserModel()),
           ChangeNotifierProvider<UserModel>(create: (_) => UserModel()),
           ChangeNotifierProvider<PlayerModel>(create: (_) => PlayerModel()),
-          ChangeNotifierProvider<AppSettingsModel>(create: (_) => AppSettingsModel()),
+          ChangeNotifierProvider<AppSettingsModel>(
+              create: (_) => AppSettingsModel()),
+          ChangeNotifierProvider<ThemModel>(
+              create: (_) => ThemModel(isLightTheme: true)),
         ],
         child: MyApp(),
       ),
     );
 
-
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemModel>(context);
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        //  brightness: Brightness.dark,
-      ),
+      theme: themeProvider.getThemeData,
       initialRoute: '/',
       routes: routes,
     );

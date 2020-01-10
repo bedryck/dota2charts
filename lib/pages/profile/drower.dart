@@ -90,7 +90,7 @@ class _AppDrowerState extends State<AppDrower> {
               crossAxisAlignment: CrossAxisAlignment.start,
             ),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Theme.of(context).accentColor,
             ),
           ),
           ListTile(

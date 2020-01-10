@@ -6,6 +6,7 @@ import '../../localData/localData.dart';
 import '../../store/store.dart';
 import '../../actions/getAppSettings.dart';
 import '../../store/appSettings.dart';
+import '../../store/them.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -16,6 +17,8 @@ class SplashScreen extends StatefulWidget {
 
 class SplashScreenState extends State<SplashScreen> {
   String userID;
+  String them;
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -25,10 +28,16 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   Future<Timer> loadData() async {
-    print('loadData');
     try {
+      bool isLight = true;
       this.userID = await getUserId();
+      this.them = await getThem();
+      if (them == 'dark') {
+        isLight = false;
+      }
+
       Provider.of<UserModel>(context, listen: false).setId(userID);
+      Provider.of<ThemModel>(context, listen: false).setThemeData(isLight);
 
       final responseAppSettings = getAppSettings();
       final patchAppSettings = getPatchAppSettings();
@@ -64,14 +73,17 @@ class SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        body: Center(
-            child: Container(
-          width: 200,
-          height: 200,
-          child: FlareActor("animation/dotacharts.flr",
-              alignment: Alignment.center,
-              fit: BoxFit.contain,
-              animation: "splash"),
-        )));
+        body: Container(
+          color: Colors.white,
+          child: Center(
+              child: Container(
+            width: 200,
+            height: 200,
+            child: FlareActor("animation/dotacharts.flr",
+                alignment: Alignment.center,
+                fit: BoxFit.contain,
+                animation: "splash"),
+          )),
+        ));
   }
 }

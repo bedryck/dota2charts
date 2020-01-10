@@ -52,13 +52,13 @@ class HorizontalBarChart extends StatelessWidget {
               // Tick and Label styling here.
               labelStyle: new charts.TextStyleSpec(
                   color: mode
-                      ? charts.Color.fromHex(code: '#03dac6')
+                      ? charts.ColorUtil.fromDartColor(Colors.grey)
                       : charts.MaterialPalette.black),
 
               // Change the line colors to match text color.
               lineStyle: new charts.LineStyleSpec(
                   color: mode
-                      ? charts.Color.fromHex(code: '#03dac6')
+                      ? charts.ColorUtil.fromDartColor(Colors.grey)
                       : charts.MaterialPalette.black))),
     );
   }
@@ -69,6 +69,9 @@ class HorizontalBarChart extends StatelessWidget {
     return [
       new charts.Series<HorizontalModel, String>(
         id: 'Sales',
+        colorFn: (_, __) => mode
+            ? charts.ColorUtil.fromDartColor(Colors.blueGrey)
+            : charts.ColorUtil.fromDartColor(Colors.blueAccent),
         domainFn: (HorizontalModel sales, _) => sales.mode,
         measureFn: (HorizontalModel sales, _) => sales.games,
         data: data,

@@ -23,7 +23,7 @@ class NotAuthorized extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
             ),
             FlatButton(
-              color: Colors.blue,
+              color: Theme.of(context).accentColor,
               textColor: Colors.white,
               disabledColor: Colors.grey,
               disabledTextColor: Colors.black,
@@ -43,14 +43,19 @@ class NotAuthorized extends StatelessWidget {
                 Navigator.pushNamed(context, '/steamAuth');
               },
             ),
+            Text(
+              '- or -',
+              style: TextStyle(color: Colors.grey),
+            ),
             FlatButton(
-              color: Colors.blue,
+              color: Theme.of(context).accentColor,
               textColor: Colors.white,
               disabledColor: Colors.grey,
               disabledTextColor: Colors.black,
               padding: EdgeInsets.all(8.0),
               splashColor: Colors.blueAccent,
               child: Container(
+                height: 30,
                 padding: EdgeInsets.only(left: 20),
                 width: 200,
                 child: Row(

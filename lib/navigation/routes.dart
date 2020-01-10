@@ -13,6 +13,7 @@ import '../pages/settings/settings.dart';
 
 final Map<String, Widget Function(BuildContext)> routes = {
   '/': (context) => SplashScreen(),
+  // '/': (context) => Settings(),
   '/profile': (context) => Profile(),
   '/splash': (context) => SplashScreen(),
   '/notAuth': (context) => NotAuthorized(),
