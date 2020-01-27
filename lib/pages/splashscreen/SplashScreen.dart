@@ -41,6 +41,7 @@ class SplashScreenState extends State<SplashScreen> {
 
       final responseAppSettings = getAppSettings();
       final patchAppSettings = getPatchAppSettings();
+      print(patchAppSettings);
 
       Provider.of<AppSettingsModel>(context, listen: false)
           .setValue(await responseAppSettings);
@@ -62,7 +63,7 @@ class SplashScreenState extends State<SplashScreen> {
     print(this.userID);
     if (this.userID != '') {
       print('change to home with id ${this.userID}');
-      Navigator.pushReplacementNamed(context, '/profile');
+      Navigator.pushReplacementNamed(context, '/home');
     } else {
       Navigator.pushReplacementNamed(context, '/notAuth');
       print('change to login');

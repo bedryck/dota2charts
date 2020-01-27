@@ -10,6 +10,7 @@ import '../pages/totals/Totals.dart';
 import '../pages/counts/Counts.dart';
 import '../pages/searchAuthentication/searchAuthentication.dart';
 import '../pages/settings/settings.dart';
+import '../pages/home/Home.dart';
 
 final Map<String, Widget Function(BuildContext)> routes = {
   '/': (context) => SplashScreen(),
@@ -23,5 +24,7 @@ final Map<String, Widget Function(BuildContext)> routes = {
   '/totals': (context) => Totals(),
   '/counts': (context) => Counts(),
   '/searchAuth': (context) => SearchAuth(),
-  '/settings': (context) => Settings()
+  '/settings': (context) => Settings(),
+  '/home': (context) => Home()
+  
 };

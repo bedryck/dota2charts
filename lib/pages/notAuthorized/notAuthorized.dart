@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../localData/localData.dart';
+
 
 class NotAuthorized extends StatelessWidget {
   @override
@@ -71,6 +73,29 @@ class NotAuthorized extends StatelessWidget {
               ),
               onPressed: () {
                 Navigator.pushNamed(context, '/searchAuth');
+              },
+            ),
+            FlatButton(
+              // color: Theme.of(context).accentColor,
+              textColor: Colors.white,
+              disabledColor: Colors.grey,
+              disabledTextColor: Colors.black,
+              padding: EdgeInsets.all(9.0),
+              splashColor: Colors.blueAccent,
+              child: Container(
+                height: 30,
+                width: 200,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('Skip', style: TextStyle(  decoration: TextDecoration.underline, color: Colors.grey),)
+                  ],
+                ),
+              ),
+              onPressed: () {
+                setUserId("skip");
+                
+                Navigator.pushNamed(context, '/home');
               },
             )
           ],

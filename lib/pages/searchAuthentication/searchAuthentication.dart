@@ -56,7 +56,7 @@ class _SearchAuthState extends State<SearchAuth> {
                 Provider.of<UserModel>(context, listen: false).setId("$id");
 
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/profile', (Route<dynamic> route) => false);
+                    '/home', (Route<dynamic> route) => false);
               },
             ),
           ],

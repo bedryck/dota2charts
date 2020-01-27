@@ -48,7 +48,7 @@ class _SteamAuthenticationState extends State<SteamAuthentication> {
                                     .setId(message.message);
 
                                 Navigator.of(context).pushNamedAndRemoveUntil(
-                                    '/profile',
+                                    '/home',
                                     (Route<dynamic> route) => false);
                               }
                             })

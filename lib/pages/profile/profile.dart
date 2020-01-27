@@ -21,6 +21,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   bool animation = true;
   bool isError = false;
+  bool isNotLogined = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -30,9 +31,17 @@ class _ProfileState extends State<Profile> {
   }
 
   Future<void> getData() async {
+    print('getdata');
     try {
       final String userId =
           Provider.of<UserModel>(context, listen: false).currentId;
+      if (userId == null || userId.length == 0 || userId == 'skip') {
+        return setState(() {
+          animation = false;
+          isError = false;
+          isNotLogined = true;
+        });
+      }
       // final responseAppSettings = getAppSettings();
       // final patchAppSettings = getPatchAppSettings();
 
@@ -73,12 +82,9 @@ class _ProfileState extends State<Profile> {
     }
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-
 
     return Scaffold(
       key: _scaffoldKey,
@@ -90,9 +96,9 @@ class _ProfileState extends State<Profile> {
           ];
         },
         body: Consumer<PlayerModel>(builder: (context, player, child) {
-          if (isError) {
+          if (isNotLogined) {
             return Center(
-              child: Row(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Icon(
@@ -101,10 +107,63 @@ class _ProfileState extends State<Profile> {
                     size: 30.0,
                     semanticLabel: 'Error',
                   ),
-                  Text(
-                    ' Oops something went wrong... try later',
-                    style: TextStyle(color: Color(0xffD57A66)),
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    child: Text(
+                      'It looks like you are not authorized. You can view information only from Pro Dota page',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                  FlatButton(
+                    // color: Theme.of(context).accentColor,
+                    textColor: Colors.white,
+                    disabledColor: Colors.grey,
+                    disabledTextColor: Colors.black,
+                    padding: EdgeInsets.all(9.0),
+                    splashColor: Colors.blueAccent,
+                    child: Container(
+                      height: 30,
+                      width: 200,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Authorize',
+                            style:
+                                TextStyle(decoration: TextDecoration.underline),
+                          )
+                        ],
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/notAuth');
+                    },
                   )
+                ],
+              ),
+            );
+          }
+
+          if (isError) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.error,
+                    color: Color(0xffD57A66),
+                    size: 30.0,
+                    semanticLabel: 'Error',
+                  ),
+                  Container(
+                      padding: EdgeInsets.all(20),
+                      child: Text(
+                        ' Oops something went wrong... try later',
+                        style: TextStyle(color: Color(0xffD57A66)),
+                      )),
                 ],
               ),
             );
