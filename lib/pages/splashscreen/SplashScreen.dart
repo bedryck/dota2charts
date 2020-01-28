@@ -77,13 +77,25 @@ class SplashScreenState extends State<SplashScreen> {
         body: Container(
           color: Colors.white,
           child: Center(
-              child: Container(
-            width: 200,
-            height: 200,
-            child: FlareActor("animation/dotacharts.flr",
-                alignment: Alignment.center,
-                fit: BoxFit.contain,
-                animation: "splash"),
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                  width: 200,
+                  height: 200,
+                  child: FlareActor("animation/dotacharts.flr",
+                      alignment: Alignment.center,
+                      fit: BoxFit.contain,
+                      animation: "splash")),
+              Container(
+                  width: 200,
+                  height: 3,
+                  margin: EdgeInsets.only(top: 100),
+                  child: LinearProgressIndicator(
+                    backgroundColor: Colors.blue[100],
+                    valueColor:  AlwaysStoppedAnimation<Color>(Colors.blue[800]),
+                  ))
+            ],
           )),
         ));
   }

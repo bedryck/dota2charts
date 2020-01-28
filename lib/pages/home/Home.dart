@@ -7,14 +7,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     Profile(),
-    Text(
-      'Index 1: Pro dota',
-      style: optionStyle,
+    Scaffold(
+      body: SafeArea(
+        child: Text(
+          'Index 1: Pro dota',
+          style: optionStyle,
+        ),
+      ),
     ),
   ];
 
@@ -24,10 +28,9 @@ class _HomeState extends State<Home> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
-      bool isDark;
+    bool isDark;
 
     final ThemeData theme = Theme.of(context);
     isDark = theme.brightness == Brightness.dark;
@@ -35,12 +38,11 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
-        children:  _widgetOptions,
+        children: _widgetOptions,
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            
             icon: Icon(Icons.dashboard),
             title: Text('Dashboard'),
           ),
