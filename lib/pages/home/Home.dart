@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../profile/profile.dart';
+import '../competitive/Competitive.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -8,18 +9,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 1;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
   static List<Widget> _widgetOptions = <Widget>[
     Profile(),
-    Scaffold(
-      body: SafeArea(
-        child: Text(
-          'Index 1: Pro dota',
-          style: optionStyle,
-        ),
-      ),
-    ),
+    Competitive(),
   ];
 
   void _onItemTapped(int index) {
