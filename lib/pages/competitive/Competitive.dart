@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import './LastMatches.dart';
 
 class Competitive extends StatelessWidget {
+  onPushRoute(context, widget) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => widget),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,19 +18,19 @@ class Competitive extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          _card(context, 'Last matches',
-              'https://gamepedia.cursecdn.com/dota2_gamepedia/thumb/e/e6/TI4_KeyArena_1.jpg/400px-TI4_KeyArena_1.jpg?version=e0a219c1bbe9b52eb63f81da731d1e26'),
-          _card(context, 'Pro teams',
-              'http://cdn.dota2.com/apps/dota2/images/blogfiles/ti9_dpc_invites_orq_im.png'),
-          _card(context, 'Pro players',
-              'https://statics.sportskeeda.com/editor/2019/07/103b0-15623172658140-500.jpg'),
+          _card(context, 'Last matches', 'images/matches.jpg',
+              () => onPushRoute(context, LastMatches())),
+          _card(context, 'Pro teams', 'images/teams.png',
+              () => onPushRoute(context, LastMatches())),
+          _card(context, 'Pro players', 'images/players.jpg',
+              () => onPushRoute(context, LastMatches())),
         ],
       ),
     );
   }
 }
 
-Widget _card(BuildContext context, text, img) {
+Widget _card(BuildContext context, text, img, onTap) {
   return SizedBox(
     height: 200,
     child: Card(
@@ -30,13 +38,13 @@ Widget _card(BuildContext context, text, img) {
       clipBehavior: Clip.antiAlias,
       // shape: shape,
       child: InkWell(
-        onTap: () {},
+        onTap: onTap,
         child: Stack(children: <Widget>[
           Container(
             // color: Colors.red,
             decoration: BoxDecoration(
                 image: DecorationImage(
-              image: NetworkImage(img),
+              image: AssetImage(img),
               fit: BoxFit.cover,
             )),
           ),
