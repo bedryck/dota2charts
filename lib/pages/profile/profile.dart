@@ -31,7 +31,6 @@ class _ProfileState extends State<Profile> {
   }
 
   Future<void> getData() async {
-    print('getdata');
     try {
       final String userId =
           Provider.of<UserModel>(context, listen: false).currentId;

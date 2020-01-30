@@ -33,7 +33,6 @@ class _AppDrowerState extends State<AppDrower> {
               child: Text("Logout"),
               onPressed: () {
                 // Navigator.of(context).pop();
-                print('logout');
                 Provider.of<UserModel>(context, listen: false).setId('');
                 setUserId('');
                 Provider.of<PlayerModel>(context, listen: false)

@@ -3,33 +3,9 @@ import '../../actions/getProMatches.dart';
 import '../../helpers/helpers.dart';
 
 class LastMatches extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
-  List<ItemMatches> gamesValueAsModel(data) {
-    return data.map<ItemMatches>((game) {
-      return ItemMatches(
-        matchId: game['match_id'],
-        duration: game['duration'],
-        startTime: game['start_time'],
-        radiantTeamId: game['radiant_team_id'],
-        radiantName: game['radiant_name'],
-        direTeamId: game['dire_team_id'],
-        direName: game['dire_name'],
-        leagueid: game['leagueid'],
-        leagueName: game['league_name'],
-        seriesId: game['series_id'],
-        seriesType: game["series_type"],
-        radiantScore: game["radiant_score"],
-        direScore: game["dire_score"],
-        radiantWin: game["radiant_win"],
-      );
-    }).toList();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _scaffoldKey,
         appBar: AppBar(
           title: Text('Last matches'),
         ),
@@ -186,22 +162,22 @@ class LastMatches extends StatelessWidget {
 }
 
 class ItemMatches {
-  ItemMatches(
-      {this.matchId,
-      this.duration,
-      this.startTime,
-      this.radiantTeamId,
-      this.radiantName,
-      this.direTeamId,
-      this.direName,
-      this.leagueid,
-      this.leagueName,
-      this.seriesId,
-      this.seriesType,
-      this.radiantScore,
-      this.direScore,
-      this.radiantWin,
-      this.isExpanded = false});
+  ItemMatches({
+    this.matchId,
+    this.duration,
+    this.startTime,
+    this.radiantTeamId,
+    this.radiantName,
+    this.direTeamId,
+    this.direName,
+    this.leagueid,
+    this.leagueName,
+    this.seriesId,
+    this.seriesType,
+    this.radiantScore,
+    this.direScore,
+    this.radiantWin,
+  });
 
   int matchId;
   int duration;
@@ -217,5 +193,25 @@ class ItemMatches {
   int radiantScore;
   int direScore;
   bool radiantWin;
-  bool isExpanded;
+}
+
+List<ItemMatches> gamesValueAsModel(data) {
+  return data.map<ItemMatches>((game) {
+    return ItemMatches(
+      matchId: game['match_id'],
+      duration: game['duration'],
+      startTime: game['start_time'],
+      radiantTeamId: game['radiant_team_id'],
+      radiantName: game['radiant_name'],
+      direTeamId: game['dire_team_id'],
+      direName: game['dire_name'],
+      leagueid: game['leagueid'],
+      leagueName: game['league_name'],
+      seriesId: game['series_id'],
+      seriesType: game["series_type"],
+      radiantScore: game["radiant_score"],
+      direScore: game["dire_score"],
+      radiantWin: game["radiant_win"],
+    );
+  }).toList();
 }

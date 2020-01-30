@@ -41,7 +41,6 @@ class _SteamAuthenticationState extends State<SteamAuthentication> {
                             name: 'Dotacharts',
                             onMessageReceived: (JavascriptMessage message) {
                               if (message.message != null) {
-                                print('message web view ${message.message}');
                                 setUserId(
                                     message.message); //set user to local data
                                 Provider.of<UserModel>(context, listen: false)

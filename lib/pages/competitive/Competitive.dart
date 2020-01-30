@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './LastMatches.dart';
+import './ProTeams.dart';
 
 class Competitive extends StatelessWidget {
   onPushRoute(context, widget) {
@@ -21,7 +22,7 @@ class Competitive extends StatelessWidget {
           _card(context, 'Last matches', 'images/matches.jpg',
               () => onPushRoute(context, LastMatches())),
           _card(context, 'Pro teams', 'images/teams.png',
-              () => onPushRoute(context, LastMatches())),
+              () => onPushRoute(context, ProTeams())),
           _card(context, 'Pro players', 'images/players.jpg',
               () => onPushRoute(context, LastMatches())),
         ],
