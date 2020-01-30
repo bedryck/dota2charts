@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../actions/getProMatches.dart';
+import '../../helpers/helpers.dart';
 
-class LastMatches extends StatefulWidget {
-  @override
-  _LastMatchesState createState() => _LastMatchesState();
-}
-
-class _LastMatchesState extends State<LastMatches> {
-  // List<ItemMatches> dataGames;
-  List<ItemMatches> dataGames = [];
+class LastMatches extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   List<ItemMatches> gamesValueAsModel(data) {
     return data.map<ItemMatches>((game) {
@@ -32,45 +27,161 @@ class _LastMatchesState extends State<LastMatches> {
   }
 
   @override
-  void initState() {
-    super.initState();
-
-    getData();
-  }
-
-  getData() async {
-    var data = await getProMatches();
-    setState(() {
-      dataGames = gamesValueAsModel(data);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           title: Text('Last matches'),
         ),
-        body: dataGames.length == 0
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : ListView(
+        body: FutureBuilder<dynamic>(
+          future: getProMatches(),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            Widget children;
+
+            if (snapshot.hasData) {
+              List<ItemMatches> dataGames;
+              dataGames = gamesValueAsModel(snapshot.data);
+              children = ListView(
                 children: dataGames.map<Container>((ItemMatches item) {
                   return Container(
-                      height: 200,
                       child: Card(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(item.radiantName ?? ''),
-                            // Text('vs'),
-                            Text(item.direName ?? '')
-                          ],
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            item.leagueName ?? '',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.grey),
+                          ),
                         ),
-                      ));
+                        Container(
+                            child: Row(
+                          children: <Widget>[
+                            Expanded(
+                                child: Text(
+                              item.radiantName ?? '',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xff63A375),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
+                            Container(
+                                child: Row(
+                              children: <Widget>[
+                                item.radiantWin
+                                    ? Container(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 5),
+                                        child: Icon(
+                                          Icons.local_activity,
+                                          color: Colors.lime,
+                                          size: 17,
+                                        ),
+                                      )
+                                    : Container(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 5),
+                                        child: Icon(
+                                          Icons.local_activity,
+                                          color: Colors.transparent,
+                                          size: 17,
+                                        ),
+                                      ),
+                                Container(
+                                  child: Text(
+                                    '${item.radiantScore}',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  width: 20,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  child: Text(
+                                    'vs',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                Container(
+                                  child: Text(
+                                    '${item.direScore}',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  width: 20,
+                                ),
+                                !item.radiantWin
+                                    ? Container(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 5),
+                                        child: Icon(
+                                          Icons.local_activity,
+                                          color: Colors.lime,
+                                          size: 17,
+                                        ),
+                                      )
+                                    : Container(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 5),
+                                        child: Icon(
+                                          Icons.local_activity,
+                                          color: Colors.transparent,
+                                          size: 17,
+                                        ),
+                                      ),
+                              ],
+                            )),
+                            Expanded(
+                                child: Text(
+                              item.direName ?? '',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xffD57A66),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
+                          ],
+                        )),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            duration(item.duration),
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        )
+                      ],
+                    ),
+                  ));
                 }).toList(),
-              ));
+              );
+            } else if (snapshot.hasError) {
+              children = Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.error,
+                      color: Color(0xffD57A66),
+                      size: 30.0,
+                      semanticLabel: 'Error',
+                    ),
+                    Container(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          ' Oops something went wrong... ${snapshot.error}',
+                          style: TextStyle(color: Color(0xffD57A66)),
+                        )),
+                  ],
+                ),
+              );
+            } else {
+              children = Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return children;
+          },
+        ));
   }
 }
 

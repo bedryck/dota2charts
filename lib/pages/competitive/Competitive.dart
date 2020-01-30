@@ -13,8 +13,8 @@ class Competitive extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: null,
         title: Text('Competitive dota'),
+        automaticallyImplyLeading: false,
       ),
       body: ListView(
         children: <Widget>[
