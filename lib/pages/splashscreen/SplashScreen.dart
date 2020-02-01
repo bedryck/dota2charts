@@ -30,6 +30,7 @@ class SplashScreenState extends State<SplashScreen> {
   Future<Timer> loadData() async {
     try {
       bool isLight = true;
+
       this.userID = await getUserId();
       this.them = await getThem();
       if (them == 'dark') {
@@ -46,6 +47,7 @@ class SplashScreenState extends State<SplashScreen> {
           .setValue(await responseAppSettings);
       Provider.of<AppSettingsModel>(context, listen: false)
           .setPatchValue(await patchAppSettings);
+
       return Timer(Duration(milliseconds: 1500), onDoneLoading);
     } catch (e) {
       _scaffoldKey.currentState.showSnackBar(SnackBar(
@@ -57,7 +59,6 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   onDoneLoading() {
-
     if (this.userID != '') {
       Navigator.pushReplacementNamed(context, '/home');
     } else {
@@ -88,7 +89,7 @@ class SplashScreenState extends State<SplashScreen> {
                   margin: EdgeInsets.only(top: 100),
                   child: LinearProgressIndicator(
                     backgroundColor: Colors.blue[100],
-                    valueColor:  AlwaysStoppedAnimation<Color>(Colors.blue[800]),
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.blue[800]),
                   ))
             ],
           )),

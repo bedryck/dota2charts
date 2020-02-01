@@ -14,7 +14,7 @@ class InformChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: width / 2 - 10,
+      height: width / 2,
       width: width / 2 - 20,
       child: Card(
           child: Stack(

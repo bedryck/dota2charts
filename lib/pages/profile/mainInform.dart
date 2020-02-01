@@ -20,8 +20,9 @@ class MainInform extends StatelessWidget {
     return Container(
       width: screenSize.width,
       height: screenSize.width,
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
       child: Row(
+  
         children: <Widget>[
           Totals(screenSize),
           Column(

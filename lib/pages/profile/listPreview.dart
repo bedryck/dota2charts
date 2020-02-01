@@ -73,6 +73,7 @@ class ListPreview extends StatelessWidget {
         ),
         Expanded(
           child: Column(
+            
             children: itemsList,
           ),
         )

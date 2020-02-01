@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
-class ThemModel extends ChangeNotifier {
-  ThemModel({this.isLightTheme});
-  bool isLightTheme;
-
-  final darkTheme = ThemeData(
+  ThemeData darkTheme = ThemeData(
     primarySwatch: Colors.blueGrey,
     brightness: Brightness.dark,
     accentColor: Colors.blueGrey,
   );
 
-  final lightTheme = ThemeData(
+  ThemeData lightTheme = ThemeData(
     primarySwatch: Colors.blue,
   );
+
+class ThemModel extends ChangeNotifier {
+  bool isLightTheme;
+  ThemModel({this.isLightTheme = false});
+
+
   bool get getThem => isLightTheme;
 
   ThemeData get getThemeData => isLightTheme ? lightTheme : darkTheme;

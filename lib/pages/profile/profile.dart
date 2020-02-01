@@ -117,12 +117,10 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   FlatButton(
-                    // color: Theme.of(context).accentColor,
-                    textColor: Colors.white,
+                    textColor: Theme.of(context).accentColor,
                     disabledColor: Colors.grey,
                     disabledTextColor: Colors.black,
                     padding: EdgeInsets.all(9.0),
-                    splashColor: Colors.blueAccent,
                     child: Container(
                       height: 30,
                       width: 200,
@@ -173,8 +171,9 @@ class _ProfileState extends State<Profile> {
               ? RefreshIndicator(
                   onRefresh: getData,
                   child: ListView(
-                    padding: EdgeInsets.all(0),
+                    padding: EdgeInsets.only(top: 10),
                     children: <Widget>[
+                      ListInformContainer(),
                       MainInform(
                           screenSize,
                           player.countsRadiant['win'],
@@ -182,7 +181,6 @@ class _ProfileState extends State<Profile> {
                           player.countsDire['win'],
                           player.countsDire['games'],
                           animation),
-                      ListInformContainer()
                     ],
                   ))
               : Center(child: CircularProgressIndicator());

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../actions/getProPlayers.dart';
-import '../../helpers/helpers.dart';
 
 class ProPlayers extends StatelessWidget {
   final pngReExp = RegExp('.png');

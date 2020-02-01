@@ -10,7 +10,7 @@ class Totals extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        height: screenSize.width - 20,
+        height: screenSize.width,
         width: screenSize.width / 2 - 20,
         child: Card(
           child: InkWell(

@@ -21,6 +21,8 @@ class ListInformContainer extends StatelessWidget {
     heroesValue = heroesValue.sublist(0, 3);
 
     return Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ListPreview("Last games", gamesValue, InfoType.games, '/lastGames'),
         ListPreview("Best heroes", heroesValue, InfoType.heroes, '/bestHeroes'),

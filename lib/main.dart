@@ -14,7 +14,7 @@ void main() => runApp(
           ChangeNotifierProvider<AppSettingsModel>(
               create: (_) => AppSettingsModel()),
           ChangeNotifierProvider<ThemModel>(
-              create: (_) => ThemModel(isLightTheme: true)),
+              create: (_) => ThemModel()),
         ],
         child: MyApp(),
       ),
