@@ -23,11 +23,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    bool isDark;
-
-    final ThemeData theme = Theme.of(context);
-    isDark = theme.brightness == Brightness.dark;
-
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {},

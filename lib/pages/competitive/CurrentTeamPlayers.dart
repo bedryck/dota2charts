@@ -1,48 +1,35 @@
 import 'package:flutter/material.dart';
 import '../../actions/getProPlayers.dart';
 
-class ProPlayers extends StatelessWidget {
-  final pngReExp = RegExp('.png');
+class CurrentTeamPlayers extends StatelessWidget {
+  final int teamID;
+  final String teamName;
+  CurrentTeamPlayers(this.teamID, this.teamName);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Pro players'),
+          title: Text('Current team $teamName players'),
         ),
         body: FutureBuilder<dynamic>(
-          future: getProPlayers(),
+          future: getTeamPlayers(teamID),
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             Widget children;
 
             if (snapshot.hasData) {
               List<ItemPlayer> dataTeams;
               dataTeams = teamsValueAsModel(snapshot.data);
+              dataTeams = dataTeams.where((f) => f.isCurrentTeamMember == true).toList();
               List<Widget> dataRender =
                   dataTeams.map<Container>((ItemPlayer item) {
                 return Container(
                     child: Card(
                   child: ListTile(
-                    leading: Container(
-                      width: 35.0,
-                      height: 35.0,
-                      margin: EdgeInsets.only(right: 20),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                        image: DecorationImage(
-                          image: NetworkImage(item.avatarmedium),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
                     title: Text(item.name ?? ''),
                     subtitle: Wrap(
                       children: <Widget>[
                         Text('Id: ${item.accountId}'),
-                        Container(
-                          margin: EdgeInsets.only(left: 20),
-                          child: Text('Team: ${item.teamName}'),
-                        )
                       ],
                     ),
                   ),
@@ -83,24 +70,27 @@ class ProPlayers extends StatelessWidget {
 class ItemPlayer {
   ItemPlayer({
     this.accountId,
-    this.avatarmedium,
     this.name,
-    this.teamName,
+    this.gamesPlayed,
+    this.wins,
+    this.isCurrentTeamMember,
   });
 
   int accountId;
-  String avatarmedium;
-  String teamName;
   String name;
+  int gamesPlayed;
+  int wins;
+  bool isCurrentTeamMember;
 }
 
 List<ItemPlayer> teamsValueAsModel(data) {
   return data.map<ItemPlayer>((item) {
     return ItemPlayer(
       accountId: item['account_id'],
-      avatarmedium: item['avatarmedium'],
       name: item['name'],
-      teamName: item['team_name'],
+      gamesPlayed: item['games_played'],
+      wins: item['wins'],
+      isCurrentTeamMember: item['is_current_team_member'],
     );
   }).toList();
 }

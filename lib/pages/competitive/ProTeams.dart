@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../actions/getProTeams.dart';
 import '../../helpers/helpers.dart';
+import './LastTeamMatches.dart';
+import './CurrentTeamPlayers.dart';
 
 class ProTeams extends StatelessWidget {
   final pngReExp = RegExp('.png');
@@ -45,7 +47,27 @@ class ProTeams extends StatelessWidget {
                       ],
                     ),
                     trailing: PopupMenuButton(
-                      onSelected: (value) {},
+                      onSelected: (value) {
+                        print("$value ${item.teamId}");
+                        if (value == 'matches') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  LastTeamMatches(item.teamId, item.name),
+                            ),
+                          );
+                        }
+                        if (value == 'players') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  CurrentTeamPlayers(item.teamId, item.name),
+                            ),
+                          );
+                        }
+                      },
                       itemBuilder: (BuildContext context) {
                         return [
                           PopupMenuItem(
@@ -56,7 +78,6 @@ class ProTeams extends StatelessWidget {
                             child: Text('Players'),
                             value: 'players',
                           ),
-                         
                         ];
                       },
                     ),

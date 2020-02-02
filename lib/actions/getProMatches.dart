@@ -10,3 +10,14 @@ Future<List<dynamic>> getProMatches() async {
     throw Exception('Failed to load pro matches');
   }
 }
+
+Future<List<dynamic>> getProMatchesByID(int id) async {
+  final response = await http.get('https://api.opendota.com/api/teams/$id/matches');
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Failed to load pro matches');
+  }
+}
+
