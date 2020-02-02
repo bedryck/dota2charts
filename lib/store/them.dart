@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
     primarySwatch: Colors.blueGrey,
     brightness: Brightness.dark,
     accentColor: Colors.blueGrey,
+    bottomAppBarColor: Colors.grey[700]
+
   );
 
   ThemeData lightTheme = ThemeData(
     primarySwatch: Colors.blue,
+    bottomAppBarColor: Colors.blueAccent
   );
 
 class ThemModel extends ChangeNotifier {

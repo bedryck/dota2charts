@@ -12,6 +12,7 @@ class ItemGames {
     this.mode,
     this.skill,
     this.lobby,
+    this.startTime,
   });
 
   int heroId;
@@ -26,6 +27,7 @@ class ItemGames {
   int mode;
   int skill;
   int lobby;
+  int startTime;
 }
 
 class ItemHeroes {

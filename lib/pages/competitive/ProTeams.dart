@@ -44,6 +44,22 @@ class ProTeams extends StatelessWidget {
                         )
                       ],
                     ),
+                    trailing: PopupMenuButton(
+                      onSelected: (value) {},
+                      itemBuilder: (BuildContext context) {
+                        return [
+                          PopupMenuItem(
+                            child: Text('Matches'),
+                            value: 'matches',
+                          ),
+                          PopupMenuItem(
+                            child: Text('Players'),
+                            value: 'players',
+                          ),
+                         
+                        ];
+                      },
+                    ),
                   ),
                 ));
               }).toList();

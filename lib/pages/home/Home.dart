@@ -29,25 +29,47 @@ class _HomeState extends State<Home> {
     isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.search),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: IndexedStack(
         index: _selectedIndex,
         children: _widgetOptions,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
-            title: Text('Dashboard'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.mouse),
-            title: Text('Pro Dota'),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: isDark ? Colors.white : null,
-        unselectedItemColor: Colors.grey,
-        onTap: _onItemTapped,
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Expanded(
+              child: InkWell(
+                onTap: () => _onItemTapped(0),
+                child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    child: Icon(
+                      Icons.dashboard,
+                      color:
+                          _selectedIndex == 0 ? Colors.white : Colors.grey[600],
+                    )),
+              ),
+            ),
+            Expanded(
+              child: InkWell(
+                onTap: () => _onItemTapped(1),
+                child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    child: Icon(
+                      Icons.mouse,
+                      color:
+                          _selectedIndex == 1 ? Colors.white : Colors.grey[600],
+                    )),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

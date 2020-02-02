@@ -56,14 +56,6 @@ class ProfileAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Container(
-                  width: 70,
-                  height: 70,
-                  margin: EdgeInsets.only(top: 40),
-                  child: Rank(
-                      rank: player.profileRank,
-                      stars: player.profileStars,
-                      position: '')),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,6 +79,22 @@ class ProfileAppBar extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(left: 10, top: 10),
                     child: Text(
+                      'Last match: ${player.lastGame == 0 ? "unknown" : when(player.lastGame)} ago',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 13),
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(left: 10, top: 32),
+                    child: Text(
                       'WIn ratee: ${player.winRate}%',
                       style: TextStyle(
                           color: Colors.white,
@@ -95,7 +103,7 @@ class ProfileAppBar extends StatelessWidget {
                     ),
                   ),
                   Container(
-                      margin: EdgeInsets.only(left: 10, top: 10),
+                      margin: EdgeInsets.only(left: 10, top: 14),
                       child: Text(
                         "In game: ${duration(player.totalDuration)}",
                         style: TextStyle(
@@ -104,7 +112,15 @@ class ProfileAppBar extends StatelessWidget {
                             fontSize: 13),
                       )),
                 ],
-              )
+              ),
+              Container(
+                  width: 50,
+                  height: 50,
+                  margin: EdgeInsets.only(top: 40, left: 40),
+                  child: Rank(
+                      rank: player.profileRank,
+                      stars: player.profileStars,
+                      position: '')),
             ],
           ),
         );

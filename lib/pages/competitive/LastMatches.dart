@@ -118,13 +118,24 @@ class LastMatches extends StatelessWidget {
                             )),
                           ],
                         )),
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          child: Text(
-                            duration(item.duration),
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        )
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  "${when(item.duration + item.startTime)} ago",
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                child: Text(
+                                  duration(item.duration),
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              )
+                            ]),
                       ],
                     ),
                   ));

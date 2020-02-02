@@ -14,6 +14,12 @@ duration<String>(int seconds) {
 }
 
 proz<num>(int totals, int minTotals) {
-  if(minTotals == null || totals == null || totals == 0) return '0.00';
+  if (minTotals == null || totals == null || totals == 0) return '0.00';
   return (minTotals * 100 / totals).toStringAsFixed(2);
+}
+
+when<String>(int date) {
+  int dateNow = new DateTime.now().millisecondsSinceEpoch;
+
+  return duration(((dateNow - date * 1000) / 1000).round());
 }

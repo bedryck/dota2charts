@@ -118,18 +118,18 @@ class PlayerModel extends ChangeNotifier {
   List<ItemGames> get gamesValueAsModel {
     return dataGames.map<ItemGames>((game) {
       return ItemGames(
-        heroId: game['hero_id'],
-        kills: game['kills'],
-        assists: game['assists'],
-        id: game['match_id'],
-        slot: game['player_slot'],
-        radiantWin: game['radiant_win'],
-        deaths: game['deaths'],
-        duration: game['duration'],
-        mode: game['game_mode'],
-        skill: game['skill'],
-        lobby: game["lobby_type"],
-      );
+          heroId: game['hero_id'],
+          kills: game['kills'],
+          assists: game['assists'],
+          id: game['match_id'],
+          slot: game['player_slot'],
+          radiantWin: game['radiant_win'],
+          deaths: game['deaths'],
+          duration: game['duration'],
+          mode: game['game_mode'],
+          skill: game['skill'],
+          lobby: game["lobby_type"],
+          startTime: game['start_time']);
     }).toList();
   }
 
@@ -137,4 +137,8 @@ class PlayerModel extends ChangeNotifier {
     dataGames = value;
     notifyListeners();
   }
+
+  int get lastGame => dataGames.length == 0
+      ? 0
+      : dataGames[0]['start_time'] + dataGames[0]['duration'];
 }
