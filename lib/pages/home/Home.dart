@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../profile/profile.dart';
 import '../competitive/Competitive.dart';
+import '../playerSearch/playerSearch.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -25,7 +26,12 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PlayerSearch()),
+          );
+        },
         child: Icon(Icons.search),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

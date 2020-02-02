@@ -79,7 +79,7 @@ class ProfileAppBar extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(left: 10, top: 10),
                     child: Text(
-                      'Last match: ${player.lastGame == 0 ? "unknown" : when(player.lastGame)} ago',
+                      'Last match: ${player.lastGame == 0 ? "some time" : when(player.lastGame)} ago',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w400,

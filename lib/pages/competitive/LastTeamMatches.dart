@@ -55,7 +55,7 @@ class LastTeamMatches extends StatelessWidget {
                                       fontWeight: FontWeight.bold),
                                 )),
                             Container(
-                                margin: EdgeInsets.symmetric(horizontal: 20),
+                                margin: EdgeInsets.only(right: 20),
                                 child: Text('Opposing team:')),
                             Container(
                                 child: Row(children: [
@@ -69,11 +69,13 @@ class LastTeamMatches extends StatelessWidget {
                                     : null,
                               ),
                               Container(
+                                width: 100,
                                 margin: EdgeInsets.symmetric(horizontal: 20),
                                 child: Text(
                                   item.opposingTeamName ?? '',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(color: Colors.white),
+                                  overflow: TextOverflow.fade,
                                 ),
                               ),
                             ])),
