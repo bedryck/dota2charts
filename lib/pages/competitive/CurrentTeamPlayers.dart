@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../actions/getProPlayers.dart';
+import '../playerSearch/playerMain.dart';
 
 class CurrentTeamPlayers extends StatelessWidget {
   final int teamID;
@@ -20,12 +21,21 @@ class CurrentTeamPlayers extends StatelessWidget {
             if (snapshot.hasData) {
               List<ItemPlayer> dataTeams;
               dataTeams = teamsValueAsModel(snapshot.data);
-              dataTeams = dataTeams.where((f) => f.isCurrentTeamMember == true).toList();
+              dataTeams = dataTeams
+                  .where((f) => f.isCurrentTeamMember == true)
+                  .toList();
               List<Widget> dataRender =
                   dataTeams.map<Container>((ItemPlayer item) {
                 return Container(
                     child: Card(
                   child: ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PlayerMain(item.accountId)),
+                      );
+                    },
                     title: Text(item.name ?? ''),
                     subtitle: Wrap(
                       children: <Widget>[

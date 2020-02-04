@@ -14,18 +14,32 @@ class _SearchAuthState extends State<SearchAuth> {
   TextEditingController _searchQueryController = TextEditingController();
   bool _isSearching = false;
   String searchQuery = "";
+  bool isError = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   List data = [];
 
   void getUsers() async {
-    setState(() {
-      isFetching = true;
-    });
-    var response = await getPlayerList(searchQuery);
-    setState(() {
-      isFetching = false;
-      data = response;
-    });
+    try {
+      setState(() {
+        isFetching = true;
+        isError = false;
+      });
+      var response = await getPlayerList(searchQuery);
+      setState(() {
+        isFetching = false;
+        data = response;
+      });
+    } catch (e) {
+      setState(() {
+        isError = true;
+        isFetching = false;
+      });
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+        content: Text('Error: ${e.toString()}'),
+        duration: Duration(seconds: 5),
+      ));
+    }
   }
 
   void _showDialog(id, avatar, name) {
@@ -80,6 +94,7 @@ class _SearchAuthState extends State<SearchAuth> {
     }).toList();
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: _isSearching ? _buildSearchField() : Text('Find your profile'),
         actions: <Widget>[
@@ -101,11 +116,74 @@ class _SearchAuthState extends State<SearchAuth> {
                 )
         ],
       ),
-      body: isFetching
+      body: isError
           ? Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.error,
+                    color: Color(0xffD57A66),
+                    size: 30.0,
+                    semanticLabel: 'Error',
+                  ),
+                  Container(
+                      padding: EdgeInsets.all(20),
+                      child: Text(
+                        ' Oops something went wrong... try later',
+                        style: TextStyle(color: Color(0xffD57A66)),
+                      )),
+                ],
+              ),
             )
-          : ListView(shrinkWrap: true, children: itemsList),
+          : isFetching
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : itemsList.length != 0
+                  ? ListView(shrinkWrap: true, children: itemsList)
+                  : Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.all(20),
+                            child: Text(
+                              'Find yourself',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ),
+                          FlatButton(
+                            textColor: Theme.of(context).accentColor,
+                            disabledColor: Colors.grey,
+                            disabledTextColor: Colors.black,
+                            padding: EdgeInsets.all(9.0),
+                            child: Container(
+                              height: 30,
+                              width: 200,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    'Search',
+                                    style: TextStyle(
+                                        decoration: TextDecoration.underline),
+                                  )
+                                ],
+                              ),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _isSearching = true;
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                    ),
     );
   }
 

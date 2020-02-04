@@ -138,7 +138,9 @@ class PlayerModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  int get lastGame => dataGames.length == 0
+  int get lastGame => dataGames == null
       ? 0
-      : dataGames[0]['start_time'] + dataGames[0]['duration'];
+      : dataGames.length == 0
+          ? 0
+          : dataGames[0]['start_time'] + dataGames[0]['duration'];
 }

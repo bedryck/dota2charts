@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../actions/getProPlayers.dart';
+import '../playerSearch/playerMain.dart';
 
 class ProPlayers extends StatelessWidget {
   final pngReExp = RegExp('.png');
@@ -36,6 +37,13 @@ class ProPlayers extends StatelessWidget {
                       ),
                     ),
                     title: Text(item.name ?? ''),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PlayerMain(item.accountId)),
+                      );
+                    },
                     subtitle: Wrap(
                       children: <Widget>[
                         Text('Id: ${item.accountId}'),
