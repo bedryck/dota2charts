@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'mainInfo.dart';
 import './playerHeroes.dart';
-import './LastPlayerGames.dart';
+import './lastPlayerGames.dart';
 import '../../actions/getPlayer.dart';
 import './playerHeroesWinrate.dart';
 

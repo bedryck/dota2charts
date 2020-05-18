@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../ui/rank.dart';
-import '../../actions/getProMatches.dart';
 import '../../helpers/helpers.dart';
 import '../profile/informChart.dart';
 

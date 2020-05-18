@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../charts/HorizontalBarChart .dart';
+import '../../charts/HorizontalBarChart.dart';
 import '../../consts/const.dart';
 import 'package:provider/provider.dart';
 import '../../store/player.dart';
